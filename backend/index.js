@@ -1,13 +1,13 @@
 // backend/index.js
-const express = require("express");
-var cors = require("cors");
+import express, { urlencoded } from "express";
+import cors from "cors";
 
-const rootRouter = require("./routes/index");
+import rootRouter from "./routes/index";
 
 const app = express();
 
 app.use(cors());
-app.use(express.urlencoded());
+app.use(urlencoded());
 
 app.use("/api/v1", rootRouter);
 

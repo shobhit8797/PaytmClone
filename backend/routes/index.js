@@ -1,9 +1,11 @@
-// backend/routes/index.js
-const express = require('express');
-const userRouter = require("./user");
+// backend/user/index.js
+import { Router } from "express";
+import userRouter from "./user";
+import accountRouter from "./account";
 
-const router = express.Router();
+const router = Router();
 
-router.use("/user", userRouter)
+router.use("/user", userRouter);
+router.use("/account", accountRouter);
 
-module.exports = router;
+export default router;
