@@ -1,16 +1,19 @@
-import { Router } from "express";
-import { object, string } from "zod";
-import { User } from "../db";
-import { sign } from "jsonwebtoken";
-import { JWT_SECRET } from "../config";
-const router = Router();
-import { authMiddleware } from "../middleware";
+// backend/routes/user.js
+const express = require("express");
 
-const signupBody = object({
-    username: string().min(3).max(20),
-    password: string().min(6).max(100),
-    password: string().min(6).max(100),
-    firstName: string().min(1).max(50),
+const zod = require("zod");
+const { User, Account } = require("../db");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config");
+const { authMiddleware } = require("../middleware");
+
+const router = express.Router();
+
+const signupBody = zod.object({
+    username:  zod.string().min(3).max(20),
+    password:  zod.string().min(6).max(100),
+    password:  zod.string().min(6).max(100),
+    firstName: zod.string().min(1).max(50),
 });
 
 router.post("/signup", async (req, res) => {
@@ -48,7 +51,7 @@ router.post("/signup", async (req, res) => {
 
     /// -----  ------
 
-    const token = sign(
+    const token = jwt.sign(
         {
             userId,
         },
@@ -63,10 +66,10 @@ router.post("/signup", async (req, res) => {
 
 // other auth routes
 
-const updateBody = object({
-    password: string().optional(),
-    firstName: string().optional(),
-    lastName: string().optional(),
+const updateBody = zod.object({
+    password: zod.string().optional(),
+    firstName: zod.string().optional(),
+    lastName: zod.string().optional(),
 });
 
 router.put("/", authMiddleware, async (req, res) => {
@@ -112,4 +115,4 @@ router.get("/bulk", async (req, res) => {
     });
 });
 
-export default router;
+module.exports = router;

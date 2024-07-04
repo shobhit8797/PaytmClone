@@ -1,10 +1,11 @@
 // backend/routes/account.js
-import { Router } from "express";
-import { Account } from "../db";
-import { object } from "zod";
-import { authMiddleware } from "../middleware";
+const express = require("express");
+const { authMiddleware } = require("../middleware");
+const { Account } = require("../db");
+const { default: mongoose } = require("mongoose");
+const zod = require("zod");
 
-const router = Router();
+const router = express.Router();
 
 router.get("/balance", authMiddleware, async (req, res) => {
     const account = await Account.findOne({
@@ -16,9 +17,9 @@ router.get("/balance", authMiddleware, async (req, res) => {
     });
 });
 
-const transferBody = object({
-    amount: number().nonempty().int(),
-    to: string().nonempty().string(),
+const transferBody = zod.object({
+    amount: zod.number(),
+    to: zod.string(),
 });
 
 router.post("/transfer", authMiddleware, async (req, res) => {
@@ -65,4 +66,4 @@ router.post("/transfer", authMiddleware, async (req, res) => {
     });
 });
 
-export default router;
+module.exports = router;
