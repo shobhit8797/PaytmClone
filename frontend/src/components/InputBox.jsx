@@ -1,6 +1,6 @@
-export default function Input({ type, placeholder, value, onChange, label }) {
+export default function InputBox({ type, placeholder, value, onChange, label }) {
     return (
-        <div className='font-medium text-left'>
+        <div className="font-medium text-left">
             {label}
             <input
                 type={type}

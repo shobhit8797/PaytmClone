@@ -1,30 +1,34 @@
-import { BottomWarning } from "../components/BottomWarning";
+import BottomWarning from "../components/BottomWarning";
 import Button from "../components/Button";
-import { Heading } from "../components/Heading";
-import Input from "../components/Input";
-import { SubHeading } from "../components/SubHeading";
+import Heading from "../components/Heading";
+import InputBox from "../components/InputBox";
+import SubHeading from "../components/SubHeading";
 
 export const Signup = () => {
     return (
         <div className="bg-slate-300 h-screen justify-center flex">
             <div className="flex flex-col justify-center">
                 <div className="bg-white rounded-lg w-80 text-center p-2 px-4">
-                    <Heading lable={"Sign Up"} />
+                    <Heading label={"Sign Up"} />
                     <SubHeading
-                        lable={"Enter your information to create an account"}
+                        label={"Enter your information to create an account"}
                     />
-                    <Input
+                    <InputBox
                         label={"First Name"}
                         placeholder="Jhon"
                         type="text"
                     />
-                    <Input label={"Last Name"} placeholder="Doe" type="text" />
-                    <Input
+                    <InputBox
+                        label={"Last Name"}
+                        placeholder="Doe"
+                        type="text"
+                    />
+                    <InputBox
                         label={"Email"}
                         placeholder="jhondoe@gmail.com"
                         type="email"
                     />
-                    <Input
+                    <InputBox
                         label={"Password"}
                         placeholder="********"
                         type="password"
