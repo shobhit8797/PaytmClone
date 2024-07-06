@@ -21,7 +21,10 @@ export const SendMoney = () => {
                         <div className="text-sm mt-2">Amount (In Rs)</div>
 
                         <div>
-                            <InputBox placeholder="Enter Amount" type="number"/>
+                            <InputBox
+                                placeholder="Enter Amount"
+                                type="number"
+                            />
                         </div>
 
                         <div className="w-full mt-2">
