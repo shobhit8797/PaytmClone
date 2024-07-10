@@ -18,7 +18,7 @@ router.get("/balance", authMiddleware, async (req, res) => {
 });
 
 const transferBody = zod.object({
-    amount: zod.number(),
+    amount: zod.number().min(1),
     to: zod.string(),
 });
 
@@ -26,12 +26,19 @@ router.post("/transfer", authMiddleware, async (req, res) => {
     const session = await mongoose.startSession();
 
     session.startTransaction();
-    const { amount, to } = transferBody.safeParse(req.body);
+    const { success } = transferBody.safeParse(req.body);
+    if (!success) {
+        return res.status(411).json({
+            message: "Invalid Input",
+        });
+    }
 
     // Fetch the accounts within the transaction
     const account = await Account.findOne({ userId: req.userId }).session(
         session
     );
+    const { amount, to } = req.body;
+
 
     if (!account || account.balance < amount) {
         await session.abortTransaction();

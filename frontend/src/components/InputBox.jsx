@@ -1,4 +1,10 @@
-export default function InputBox({ type, placeholder, value, onChange, label }) {
+export default function InputBox({
+    type,
+    placeholder,
+    value,
+    onChange,
+    label,
+}) {
     return (
         <div className="font-medium text-left">
             {label}

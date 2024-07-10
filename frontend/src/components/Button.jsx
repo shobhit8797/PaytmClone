@@ -1,6 +1,6 @@
 export default function Button({ label, onClick, color }) {
-    const bgColor = color || "bg-slate-200";
-    const hoverBgColor = color ? "hover:bg-green-600" : "hover:bg-slate-400";
+    const bgColor = color || "bg-slate-800";
+    const hoverBgColor = color ? "hover:bg-green-600" : "hover:bg-slate-900";
     // const textColor = color ? "text-white" : "text-slate-800";
     return (
         <button
